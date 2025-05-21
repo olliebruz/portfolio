@@ -1,6 +1,16 @@
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 const Projects = () => {
+  const [clickedLinks, setClickedLinks] = useState({});
+
+  const handleLinkClick = (projectTitle) => {
+    setClickedLinks(prev => ({
+      ...prev,
+      [projectTitle]: true
+    }));
+  };
+
   const projects = [
     {
       title: "RoomGenius",
@@ -18,6 +28,42 @@ const Projects = () => {
       links: {
         project: "https://zenova.software/roomgenius",
         demo: "#"
+      }
+    },
+    {
+      title: "TableTap",
+      status: "In Development",
+      description: "A SaaS platform for restaurant owners to manage digital menus through QR codes, streamlining the ordering process and reducing operational costs.",
+      features: [
+        "QR code generation for table menus",
+        "Real-time menu updates",
+        "Analytics dashboard for restaurant owners",
+        "Customizable menu templates",
+        "Order management system",
+        "Customer feedback integration"
+      ],
+      tech: ["Python", "Django", "HTML", "CSS", "Bootstrap", "MySQL", "phpMyAdmin", "Nginx", "venv"],
+      links: {
+        project: "#",
+        demo: "#"
+      }
+    },
+    {
+      title: "Digital Portfolio",
+      status: "Live",
+      description: "A modern, responsive portfolio website showcasing my projects, skills, and experience. Built with a focus on clean design, smooth animations, and optimal user experience.",
+      features: [
+        "Responsive design for all devices",
+        "Smooth scroll animations and transitions",
+        "Interactive project showcase",
+        "Dynamic content rendering",
+        "Modern UI/UX design",
+        "Optimized performance and loading"
+      ],
+      tech: ["React", "JavaScript", "CSS", "Vercel"],
+      links: {
+        project: "https://olivermccarthy.dev",
+        demo: "https://olivermccarthy.dev"
       }
     }
   ];
@@ -64,14 +110,24 @@ const Projects = () => {
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="project-link"
+                onClick={(e) => {
+                  if (project.links.project === "#") {
+                    e.preventDefault();
+                    handleLinkClick(project.title);
+                  }
+                }}
               >
-                View Project
+                {clickedLinks[project.title] ? "Coming Soon" : "View Project"}
               </a>
               <a 
                 href={project.links.demo} 
                 className="project-link disabled"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLinkClick(`${project.title}-demo`);
+                }}
               >
-                Demo
+                {clickedLinks[`${project.title}-demo`] ? "Coming Soon" : "Demo"}
               </a>
             </div>
           </motion.div>
