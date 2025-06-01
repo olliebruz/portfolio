@@ -25,10 +25,7 @@ const Projects = () => {
         "AI-inspired room designs"
       ],
       tech: ["AI", "React", "Expo", "Node.js", "AWS"],
-      links: {
-        project: "https://zenova.software/roomgenius",
-        demo: "#"
-      }
+      link: "https://zenova.software/roomgenius"
     },
     {
       title: "TableTap",
@@ -43,10 +40,7 @@ const Projects = () => {
         "Customer feedback integration"
       ],
       tech: ["Python", "Django", "HTML", "CSS", "Bootstrap", "MySQL", "phpMyAdmin", "Nginx", "venv"],
-      links: {
-        project: "#",
-        demo: "#"
-      }
+      link: "#"
     },
     {
       title: "Digital Portfolio",
@@ -61,16 +55,14 @@ const Projects = () => {
         "Optimized performance and loading"
       ],
       tech: ["React", "JavaScript", "CSS", "Vercel"],
-      links: {
-        project: "https://olivermccarthy.dev",
-        demo: "https://olivermccarthy.dev"
-      }
+      link: "https://olivermccarthy.dev"
     }
   ];
 
   return (
     <section id="projects" className="section">
       <motion.h2
+        className="section-title"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -88,11 +80,13 @@ const Projects = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
           >
-            <div className="project-status">{project.status}</div>
+            <div className={`project-status ${project.status.toLowerCase().replace(' ', '-')}`}>
+              {project.status}
+            </div>
             <h3>{project.title}</h3>
             <p className="project-description">{project.description}</p>
             <div className="project-features">
-              <h4>Key Features:</h4>
+              <h4>Key Features</h4>
               <ul>
                 {project.features.map((feature, i) => (
                   <li key={i}>{feature}</li>
@@ -104,32 +98,23 @@ const Projects = () => {
                 <span key={i} className="tech-tag">{tech}</span>
               ))}
             </div>
-            <div className="project-links">
-              <a 
-                href={project.links.project} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="project-link"
-                onClick={(e) => {
-                  if (project.links.project === "#") {
-                    e.preventDefault();
-                    handleLinkClick(project.title);
-                  }
-                }}
-              >
-                {clickedLinks[project.title] ? "Coming Soon" : "View Project"}
-              </a>
-              <a 
-                href={project.links.demo} 
-                className="project-link disabled"
-                onClick={(e) => {
+            <motion.a 
+              href={project.link} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className={`project-link ${project.link === "#" ? "disabled" : ""}`}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={(e) => {
+                if (project.link === "#") {
                   e.preventDefault();
-                  handleLinkClick(`${project.title}-demo`);
-                }}
-              >
-                {clickedLinks[`${project.title}-demo`] ? "Coming Soon" : "Demo"}
-              </a>
-            </div>
+                  handleLinkClick(project.title);
+                }
+              }}
+            >
+              {clickedLinks[project.title] ? "Coming Soon" : "View Project"}
+              <span className="link-arrow">→</span>
+            </motion.a>
           </motion.div>
         ))}
         
