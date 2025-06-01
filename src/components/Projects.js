@@ -1,18 +1,26 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Projects = () => {
-  const [clickedLinks, setClickedLinks] = useState({});
-
-  const handleLinkClick = (projectTitle) => {
-    setClickedLinks(prev => ({
-      ...prev,
-      [projectTitle]: true
-    }));
-  };
-
   const projects = [
     {
+      id: "mailgem",
+      title: "MailGem",
+      status: "Live",
+      description: "A Chrome extension that uses Google's built-in AI to generate personalized, context-aware email replies in Gmail and Outlook, enhancing productivity while ensuring privacy.",
+      features: [
+        "AI-powered email response generation",
+        "Gmail & Outlook integration",
+        "Context-aware responses",
+        "Privacy-focused using on-device AI",
+        "Seamless browser integration",
+        "Real-time response generation"
+      ],
+      tech: ["JavaScript", "CSS", "Chrome Extension", "Gemini Nano", "Prompt API"],
+      link: "https://devpost.com/software/mailgem"
+    },
+    {
+      id: "roomgenius",
       title: "RoomGenius",
       status: "Coming Soon",
       description: "An AI-powered interior design assistant that transforms living spaces through intelligent recommendations and visualizations.",
@@ -28,6 +36,7 @@ const Projects = () => {
       link: "https://zenova.software/roomgenius"
     },
     {
+      id: "tabletap",
       title: "TableTap",
       status: "In Development",
       description: "A SaaS platform for restaurant owners to manage digital menus through QR codes, streamlining the ordering process and reducing operational costs.",
@@ -43,6 +52,7 @@ const Projects = () => {
       link: "#"
     },
     {
+      id: "portfolio",
       title: "Digital Portfolio",
       status: "Live",
       description: "A modern, responsive portfolio website showcasing my projects, skills, and experience. Built with a focus on clean design, smooth animations, and optimal user experience.",
@@ -88,7 +98,7 @@ const Projects = () => {
             <div className="project-features">
               <h4>Key Features</h4>
               <ul>
-                {project.features.map((feature, i) => (
+                {project.features.slice(0, 3).map((feature, i) => (
                   <li key={i}>{feature}</li>
                 ))}
               </ul>
@@ -98,23 +108,13 @@ const Projects = () => {
                 <span key={i} className="tech-tag">{tech}</span>
               ))}
             </div>
-            <motion.a 
-              href={project.link} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className={`project-link ${project.link === "#" ? "disabled" : ""}`}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={(e) => {
-                if (project.link === "#") {
-                  e.preventDefault();
-                  handleLinkClick(project.title);
-                }
-              }}
+            <Link 
+              to={`/project/${project.id}`} 
+              className="project-link"
             >
-              {clickedLinks[project.title] ? "Coming Soon" : "View Project"}
+              View Details
               <span className="link-arrow">→</span>
-            </motion.a>
+            </Link>
           </motion.div>
         ))}
         

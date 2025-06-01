@@ -1,0 +1,242 @@
+import { motion } from 'framer-motion';
+import { useParams, Link } from 'react-router-dom';
+
+const ProjectPage = () => {
+  const { projectId } = useParams();
+
+  const projects = {
+    mailgem: {
+      title: "MailGem",
+      status: "Live",
+      description: "A Chrome extension that uses Google's built-in AI to generate personalized, context-aware email replies in Gmail and Outlook, enhancing productivity while ensuring privacy.",
+      longDescription: `MailGem transforms the mundane and often repetitive task of email writing into a more efficient and engaging experience. 
+      By leveraging Google's built-in AI (Gemini Nano), our Chrome extension seamlessly integrates with Gmail and Outlook to generate intelligent, 
+      context-aware email responses. The extension ensures robust security and performance by using on-device AI processing, making it perfect for 
+      handling sensitive communications such as confidential business emails.`,
+      features: [
+        "AI-powered email response generation",
+        "Gmail & Outlook integration",
+        "Context-aware responses",
+        "Privacy-focused using on-device AI",
+        "Seamless browser integration",
+        "Real-time response generation"
+      ],
+      tech: ["JavaScript", "CSS", "Chrome Extension", "Gemini Nano", "Prompt API"],
+      videoId: "OWAUvVDegkk",
+      challenges: [
+        "Navigating Prompt API integration during origin trial phase",
+        "Complex DOM manipulation in Gmail and Outlook interfaces",
+        "First-time Chrome extension development learning curve",
+        "Crafting reliable and contextually appropriate AI prompts"
+      ],
+      futureFeatures: [
+        "Chrome Web Store deployment",
+        "Customizable settings page for AI parameters",
+        "Enhanced user interface and experience",
+        "Integration with additional email platforms",
+        "Advanced prompt customization options"
+      ],
+      link: "https://devpost.com/software/mailgem"
+    },
+    roomgenius: {
+      title: "RoomGenius",
+      status: "Coming Soon",
+      description: "An AI-powered interior design assistant that transforms living spaces through intelligent recommendations and visualizations.",
+      longDescription: `RoomGenius is revolutionizing the way people design their living spaces. By leveraging cutting-edge AI technology, 
+      we're making professional-grade interior design accessible to everyone. Our platform analyzes your room's dimensions, lighting, and current setup 
+      to provide personalized recommendations that match your style and budget.`,
+      features: [
+        "AI-powered room analysis and recommendations",
+        "\"10/10 Perfect Room\" AI visualization",
+        "Amazon product integration",
+        "Community-driven explore section",
+        "Popular products showcase",
+        "AI-inspired room designs"
+      ],
+      tech: ["AI", "React", "Expo", "Node.js", "AWS"],
+      screenshots: [
+        "/images/roomgenius/dashboard.png",
+        "/images/roomgenius/analysis.png",
+        "/images/roomgenius/recommendations.png"
+      ],
+      challenges: [
+        "Implementing accurate room measurement detection",
+        "Optimizing AI response times for real-time recommendations",
+        "Creating an intuitive user interface for complex features"
+      ],
+      futureFeatures: [
+        "AR visualization of furniture placement",
+        "AI-powered color scheme recommendations",
+        "Integration with more furniture retailers",
+        "Social sharing and community features"
+      ],
+      link: "https://zenova.software/roomgenius"
+    },
+    tabletap: {
+      title: "TableTap",
+      status: "In Development",
+      description: "A SaaS platform for restaurant owners to manage digital menus through QR codes, streamlining the ordering process and reducing operational costs.",
+      longDescription: `TableTap is transforming the restaurant industry by providing a seamless digital menu and ordering system. 
+      Our platform enables restaurant owners to easily manage their menus, while customers can enjoy a contactless ordering experience 
+      through their smartphones. The system integrates with existing POS systems and provides valuable analytics for business optimization.`,
+      features: [
+        "QR code generation for table menus",
+        "Real-time menu updates",
+        "Analytics dashboard for restaurant owners",
+        "Customizable menu templates",
+        "Order management system",
+        "Customer feedback integration"
+      ],
+      tech: ["Python", "Django", "HTML", "CSS", "Bootstrap", "MySQL", "phpMyAdmin", "Nginx", "venv"],
+      screenshots: [
+        "/images/tabletap/dashboard.png",
+        "/images/tabletap/menu-editor.png",
+        "/images/tabletap/analytics.png"
+      ],
+      challenges: [
+        "Ensuring real-time synchronization across devices",
+        "Building a scalable infrastructure for multiple restaurants",
+        "Creating an intuitive menu management system"
+      ],
+      futureFeatures: [
+        "Mobile app for restaurant staff",
+        "Integration with popular POS systems",
+        "Advanced analytics and reporting",
+        "Customer loyalty program"
+      ],
+      link: "#"
+    }
+  };
+
+  const project = projects[projectId];
+
+  if (!project) {
+    return (
+      <div className="project-page">
+        <div className="container" style={{ paddingTop: '120px', textAlign: 'center' }}>
+          <h2>Project not found</h2>
+          <Link to="/" className="back-link">← Back to Home</Link>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="project-page">
+      <div className="project-page-header">
+        <div className="container">
+          <Link to="/" className="back-link">← Back to Home</Link>
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {project.title}
+          </motion.h1>
+          <div className={`project-status ${project.status.toLowerCase().replace(' ', '-')}`}>
+            {project.status}
+          </div>
+        </div>
+      </div>
+
+      <div className="project-page-content">
+        <div className="container">
+          <motion.div 
+            className="project-section"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <h2>Overview</h2>
+            <p>{project.longDescription}</p>
+            {project.videoId && (
+              <div className="video-container">
+                <iframe
+                  src={`https://www.youtube.com/embed/${project.videoId}`}
+                  title={`${project.title} Demo Video`}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            )}
+          </motion.div>
+
+          <div className="project-sections-grid">
+            <motion.div 
+              className="project-section"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <h2>Technologies Used</h2>
+              <div className="tech-tags">
+                {project.tech.map((tech, index) => (
+                  <span key={index} className="tech-tag">{tech}</span>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="project-section"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
+              <h2>Key Features</h2>
+              <ul className="feature-list">
+                {project.features.map((feature, index) => (
+                  <li key={index}>{feature}</li>
+                ))}
+              </ul>
+            </motion.div>
+
+            <motion.div 
+              className="project-section"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
+              <h2>Challenges</h2>
+              <ul className="challenge-list">
+                {project.challenges.map((challenge, index) => (
+                  <li key={index}>{challenge}</li>
+                ))}
+              </ul>
+            </motion.div>
+
+            <motion.div 
+              className="project-section"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+            >
+              <h2>Future Features</h2>
+              <ul className="future-list">
+                {project.futureFeatures.map((feature, index) => (
+                  <li key={index}>{feature}</li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
+
+          {project.link !== "#" && (
+            <motion.div 
+              className="project-section"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+            >
+              <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">
+                View Project
+                <span className="link-arrow">→</span>
+              </a>
+            </motion.div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProjectPage; 

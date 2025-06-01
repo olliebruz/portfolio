@@ -462,6 +462,26 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+.achievement-list {
+  list-style: none;
+  padding: 0;
+}
+
+.achievement-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--secondary-color);
+  line-height: 1.6;
+}
+
+.achievement-list li::before {
+  content: "🏆";
+  position: absolute;
+  left: 0;
+  font-size: 1rem;
+}
+
 /* Contact Section */
 .contact-container {
   display: grid;
@@ -847,4 +867,190 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
   }
+}
+
+/* Project Page Styles */
+.project-page {
+  padding-top: 80px;
+  min-height: 100vh;
+  background-color: var(--background-color);
+}
+
+.project-page-header {
+  background: rgba(45, 55, 72, 0.3);
+  backdrop-filter: blur(10px);
+  padding: 4rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+}
+
+.back-link:hover {
+  color: var(--accent-color);
+  transform: translateX(-4px);
+}
+
+.project-page-header h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.project-page-content {
+  padding: 4rem 0;
+}
+
+.project-section {
+  margin-bottom: 4rem;
+  background: rgba(45, 55, 72, 0.3);
+  padding: 2rem;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-section h2 {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+}
+
+.project-section p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--secondary-color);
+  margin-bottom: 1.5rem;
+}
+
+.screenshots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.screenshot-container {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.screenshot-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.screenshot-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.project-sections-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.feature-list,
+.challenge-list,
+.future-list {
+  list-style: none;
+  padding: 0;
+}
+
+.feature-list li,
+.challenge-list li,
+.future-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--secondary-color);
+  line-height: 1.6;
+}
+
+.feature-list li::before,
+.challenge-list li::before,
+.future-list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+}
+
+/* Responsive adjustments for project page */
+@media (max-width: 768px) {
+  .project-page-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .project-sections-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .screenshots-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-section {
+    padding: 1.5rem;
+  }
+}
+
+.video-container {
+  margin-top: 2rem;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+  position: relative;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Remove the winner status styles */
+.project-status.winner,
+.achievement-list,
+.achievement-list li,
+.achievement-list li::before {
+  display: none;
 }
