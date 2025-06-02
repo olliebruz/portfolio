@@ -41,7 +41,7 @@ const About = () => {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
           >
-            Outside of tech, you'll usually find me shooting hoops, at the bench press, hanging out with mates, heading to the beach, gaming, or dreaming about my future Porsche.
+            Outside of tech, you'll usually find me shooting hoops, at the gym, hanging out with mates, heading to the beach, or manifesting my future Porsche.
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
