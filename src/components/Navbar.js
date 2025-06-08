@@ -39,12 +39,12 @@ const Navbar = () => {
             About
           </motion.a>
           <motion.a 
-            href={isHomePage ? "#skills" : "/#skills"}
-            onClick={(e) => handleClick(e, "skills")}
+            href={isHomePage ? "#experience" : "/#experience"}
+            onClick={(e) => handleClick(e, "experience")}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
-            Skills
+            Experience
           </motion.a>
           <motion.a 
             href={isHomePage ? "#projects" : "/#projects"}
@@ -55,12 +55,12 @@ const Navbar = () => {
             Projects
           </motion.a>
           <motion.a 
-            href={isHomePage ? "#experience" : "/#experience"}
-            onClick={(e) => handleClick(e, "experience")}
+            href={isHomePage ? "#skills" : "/#skills"}
+            onClick={(e) => handleClick(e, "skills")}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
-            Experience
+            Skills
           </motion.a>
           <motion.a 
             href={isHomePage ? "#contact" : "/#contact"}

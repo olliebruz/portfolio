@@ -1,8 +1,76 @@
 import { motion } from 'framer-motion';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import ImageSlider from '../components/ImageSlider';
+import { useEffect } from 'react';
 
 const ProjectPage = () => {
   const { projectId } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleBackClick = (e) => {
+    e.preventDefault();
+    navigate('/#projects');
+    // Add a small delay to ensure the navigation happens before scrolling
+    setTimeout(() => {
+      const projectsSection = document.getElementById('projects');
+      if (projectsSection) {
+        projectsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
+  // Special case for portfolio project
+  if (projectId === 'portfolio') {
+    return (
+      <div className="project-page">
+        <div className="container" style={{ 
+          paddingTop: '120px', 
+          textAlign: 'center',
+          minHeight: '60vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '2rem'
+        }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>
+              Plot twist: You're already here! 🎉
+            </h2>
+            <p style={{ 
+              color: 'var(--secondary-color)', 
+              fontSize: '1.2rem',
+              maxWidth: '600px',
+              margin: '0 auto',
+              lineHeight: '1.6'
+            }}>
+              This is the portfolio you're trying to view more details about. 
+              We need to go deeper! *Inception BWAAAH sound plays* 🌀
+              <br/><br/>
+              Keep exploring - you're already in the dream! 😄
+            </p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <a href="/#projects" onClick={handleBackClick} className="back-link" style={{ fontSize: '1.1rem' }}>
+              ← Back to exploring
+            </a>
+          </motion.div>
+        </div>
+      </div>
+    );
+  }
 
   const projects = {
     mailgem: {
@@ -89,9 +157,12 @@ const ProjectPage = () => {
       ],
       tech: ["Python", "Django", "HTML", "CSS", "Bootstrap", "MySQL", "phpMyAdmin", "Nginx", "venv"],
       screenshots: [
-        "/images/tabletap/dashboard.png",
-        "/images/tabletap/menu-editor.png",
-        "/images/tabletap/analytics.png"
+        "/images/tabletap/why choose tabletap.png",
+        "/images/tabletap/qr codes.png",
+        "/images/tabletap/admin management saas.png",
+        "/images/tabletap/order details.png",
+        "/images/tabletap/manage restaurants.png",
+        "/images/tabletap/login and google oauth.png",
       ],
       challenges: [
         "Ensuring real-time synchronization across devices",
@@ -125,7 +196,7 @@ const ProjectPage = () => {
     <div className="project-page">
       <div className="project-page-header">
         <div className="container">
-          <Link to="/" className="back-link">← Back to Home</Link>
+          <a href="/#projects" onClick={handleBackClick} className="back-link">← Back to Projects</a>
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -159,6 +230,9 @@ const ProjectPage = () => {
                   allowFullScreen
                 ></iframe>
               </div>
+            )}
+            {project.screenshots && (
+              <ImageSlider images={project.screenshots} />
             )}
           </motion.div>
 
