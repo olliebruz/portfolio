@@ -115,18 +115,14 @@ const ProjectPage = () => {
       to provide personalized recommendations that match your style and budget.`,
       features: [
         "AI-powered room analysis and recommendations",
-        "\"10/10 Perfect Room\" AI visualization",
+        '"10/10 Perfect Room" AI visualization',
         "Amazon product integration",
         "Community-driven explore section",
         "Popular products showcase",
         "AI-inspired room designs"
       ],
       tech: ["AI", "React", "Expo", "Node.js", "AWS"],
-      screenshots: [
-        "/images/roomgenius/dashboard.png",
-        "/images/roomgenius/analysis.png",
-        "/images/roomgenius/recommendations.png"
-      ],
+      // Removed screenshots for RoomGenius
       challenges: [
         "Implementing accurate room measurement detection",
         "Optimizing AI response times for real-time recommendations",
@@ -138,7 +134,7 @@ const ProjectPage = () => {
         "Integration with more furniture retailers",
         "Social sharing and community features"
       ],
-      link: "https://zenova.software/roomgenius"
+      link: "https://www.roomgenius.app"
     },
     tabletap: {
       title: "TableTap",
@@ -220,18 +216,41 @@ const ProjectPage = () => {
           >
             <h2>Overview</h2>
             <p>{project.longDescription}</p>
-            {project.videoId && (
-              <div className="video-container">
-                <iframe
-                  src={`https://www.youtube.com/embed/${project.videoId}`}
-                  title={`${project.title} Demo Video`}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
+            {projectId === 'roomgenius' && (
+              <div style={{ margin: '2rem 0', textAlign: 'center' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginTop: '2.5rem', flexWrap: 'wrap' }}>
+                  {[
+                    '/images/roomgenius/home_screen_light.png',
+                    '/images/roomgenius/trending_styles_light.png',
+                    '/images/roomgenius/ai_inspiration_light.png'
+                  ].map((src, idx) => (
+                    <div key={src} style={{
+                      border: '1px solid #eee',
+                      borderRadius: '2rem',
+                      boxShadow: '0 4px 24px rgba(0,0,0,0.10)',
+                      overflow: 'hidden',
+                      width: '220px',
+                      background: '#fff',
+                      padding: '1rem 0.5rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      minHeight: '440px',
+                      maxHeight: '440px',
+                    }}>
+                      <img src={src} alt={`RoomGenius app screenshot ${idx+1}`} style={{
+                        width: '200px',
+                        height: '420px',
+                        objectFit: 'cover',
+                        borderRadius: '1.5rem',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
+                      }} />
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
-            {project.screenshots && (
+            {project.screenshots && projectId !== 'roomgenius' && (
               <ImageSlider images={project.screenshots} />
             )}
           </motion.div>
