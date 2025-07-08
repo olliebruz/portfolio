@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import ImageSlider from '../components/ImageSlider';
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 const ProjectPage = () => {
   const { projectId } = useParams();
@@ -216,6 +216,17 @@ const ProjectPage = () => {
           >
             <h2>Overview</h2>
             <p>{project.longDescription}</p>
+            {projectId === 'mailgem' && project.videoId && (
+              <div className="video-container">
+                <iframe
+                  src={`https://www.youtube.com/embed/${project.videoId}`}
+                  title={`${project.title} Demo Video`}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            )}
             {projectId === 'roomgenius' && (
               <div style={{ margin: '2rem 0', textAlign: 'center' }}>
                 <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginTop: '2.5rem', flexWrap: 'wrap' }}>
